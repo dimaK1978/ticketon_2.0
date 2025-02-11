@@ -6,6 +6,7 @@ import kz.ticketon.pages.ChooseCityPage;
 import kz.ticketon.pages.ChooseLanguagePage;
 import kz.ticketon.pages.EventsPage;
 import kz.ticketon.pages.MainScreenAppPage;
+import kz.ticketon.utils.PropertiesUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.By;
@@ -24,14 +25,14 @@ public class BaseClassAppTest {
     public void initialize() throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
 
-        capabilities.setCapability("platformName", "Android");
-        capabilities.setCapability("deviceName", "sdk_gphone64_x86_64");
-        capabilities.setCapability("platformVersion", "15");
-        capabilities.setCapability("automationName", "Appium");
-        capabilities.setCapability("appPackage", "kz.glatis.ticketon");
-        capabilities.setCapability("appActivity", ".MainActivity2");
+        capabilities.setCapability("platformName", PropertiesUtil.get("platform.name"));
+        capabilities.setCapability("deviceName", PropertiesUtil.get("device.mame"));
+        capabilities.setCapability("platformVersion", PropertiesUtil.get("platform.version"));
+        capabilities.setCapability("automationName", PropertiesUtil.get("automation.name"));
+        capabilities.setCapability("appPackage", PropertiesUtil.get("app.package"));
+        capabilities.setCapability("appActivity", PropertiesUtil.get("app.activity"));
 
-        driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+        driver = new AndroidDriver(new URL(PropertiesUtil.get("appium.url")), capabilities);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
         // 🔹 Проверка доступных контекстов (NATIVE_APP, WEBVIEW и т. д.)

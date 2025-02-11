@@ -1,10 +1,12 @@
 package kz.ticketon;
 
+import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import kz.ticketon.pages.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 
+@Feature("Мобильное приложение")
 public class StartTest extends BaseClassAppTest {
     @Story("Проверка запуска и стартовая нстройка языка и города приложения, преход на главную страницу, главное меню выбор пункта 'Cобытия'")
     @ParameterizedTest()

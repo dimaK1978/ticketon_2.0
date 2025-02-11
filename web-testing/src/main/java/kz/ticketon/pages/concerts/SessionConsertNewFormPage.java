@@ -3,7 +3,7 @@ package kz.ticketon.pages.concerts;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
-import kz.ticketon.SleepUtils;
+import kz.ticketon.utils.SleepUtils;
 import kz.ticketon.pages.MakingOrderNewFormPage;
 import kz.ticketon.pages.MakingOrderPage;
 import kz.ticketon.pages.SessionPage;

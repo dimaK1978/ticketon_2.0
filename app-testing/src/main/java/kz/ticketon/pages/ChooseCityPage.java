@@ -4,7 +4,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.qameta.allure.Step;
 import kz.ticketon.Cities;
 import kz.ticketon.Languages;
-import kz.ticketon.NamedUtils;
+import kz.ticketon.utils.NamedUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;

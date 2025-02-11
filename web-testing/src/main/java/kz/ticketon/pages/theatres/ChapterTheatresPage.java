@@ -4,7 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import kz.ticketon.Cities;
 import kz.ticketon.Languages;
-import kz.ticketon.SleepUtils;
+import kz.ticketon.utils.SleepUtils;
 import kz.ticketon.pages.ChapterPage;
 import kz.ticketon.pages.EventPage;
 import org.openqa.selenium.By;

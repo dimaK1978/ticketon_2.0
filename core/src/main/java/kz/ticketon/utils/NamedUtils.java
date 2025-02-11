@@ -1,4 +1,8 @@
-package kz.ticketon;
+package kz.ticketon.utils;
+
+import kz.ticketon.Cities;
+import kz.ticketon.Languages;
+import kz.ticketon.MainMenuButtonsMainPage;
 
 public class NamedUtils {
     public static String getCityNameByLanguage(final Cities city, final Languages language) {

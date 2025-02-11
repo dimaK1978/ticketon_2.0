@@ -1,4 +1,4 @@
-package kz.ticketon;
+package kz.ticketon.utils;
 
 import java.util.concurrent.TimeUnit;
 

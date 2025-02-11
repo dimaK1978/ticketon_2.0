@@ -13,6 +13,8 @@ import kz.ticketon.pages.museums.ChapterMuseumsPage;
 import kz.ticketon.pages.sports.ChapterSportsPage;
 import kz.ticketon.pages.theatres.ChapterTheatresPage;
 import kz.ticketon.pages.tours.ChapterPageTours;
+import kz.ticketon.utils.NamedUtils;
+import kz.ticketon.utils.SleepUtils;
 
 import static com.codeborne.selenide.Selenide.$x;
 
