@@ -2,7 +2,6 @@ package kz.ticketon.pages;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.qameta.allure.Step;
-import kz.ticketon.Cities;
 import kz.ticketon.Languages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

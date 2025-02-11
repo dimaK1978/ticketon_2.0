@@ -8,10 +8,10 @@ public enum Cities {
     ALMATY("almaty", "Алматы", "Алматы", "Almaty"),
     ASTANA("astana", "Астана", "Астана", "Astana"),
     ATBASAR("atbasar", "Атбасар", "Атбасар", "Atbasar");
-    private String urlString;
-    private String titleRu;
-    private String titleKz;
-    private String titleEn;
+    private final String urlString;
+    private final String titleRu;
+    private final String titleKz;
+    private final String titleEn;
 
     Cities(
             final String urlString,
@@ -24,7 +24,6 @@ public enum Cities {
         this.titleKz = titleKz;
         this.titleEn = titleEn;
     }
-
 
     public String getUrlString() {
 

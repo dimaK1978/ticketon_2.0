@@ -5,9 +5,8 @@ public enum Languages {
     ENG("en", "Eng"),
     KZ("kz", "Қаз");
 
-    private String urlString;
-
-    private String displyName;
+    private final String urlString;
+    private final String displyName;
 
     Languages(final String urlString, final String displyName) {
         this.urlString = urlString;
