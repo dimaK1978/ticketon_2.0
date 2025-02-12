@@ -53,12 +53,11 @@ public abstract class ChapterPage {
 
     @Step("Получить ожидаемый заголовок страницы раздела")
     public String getPageTitleExpected() {
-        String title = switch (language) {
+       return switch (language) {
             case KZ -> pageTitleKz;
             case ENG -> pageTitleEng;
             default -> pageTitleRus;
         };
-        return title;
     }
 
     public String pageUrlCityLanguage() {

@@ -9,7 +9,7 @@ import kz.ticketon.utils.PropertiesUtil;
 import static com.codeborne.selenide.Selenide.*;
 
 public class MainPage extends BaseTemlatePage {
-    private final String BASIC_PAGE_URL = PropertiesUtil.get("basic.page.url"); //"https://ticketon.kz";
+    private final String BASIC_PAGE_URL = "https://ticketon.kz";
     private final String pageTitleRus = "Афиша событий";
     private final String pageTitleEng = "Event schedule";
     private final String pageTitleKz = "Оқиғалар постері";
