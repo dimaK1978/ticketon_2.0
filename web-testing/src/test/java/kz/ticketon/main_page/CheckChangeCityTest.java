@@ -18,7 +18,7 @@ import java.util.stream.Stream;
 @Feature("Работоспособность основных элемнтов главной страницы")
 public class CheckChangeCityTest extends BaseClassWebTest {
 
-    static Stream<Object[]> cities() {
+    static Stream<Object[]> citiesAndLanguage() {
         List<Object[]> list = new ArrayList<>();
         Arrays.asList(Cities.values()).forEach(
                 city -> Arrays.asList(Languages.values()).forEach(
@@ -36,7 +36,7 @@ public class CheckChangeCityTest extends BaseClassWebTest {
 
     @Story("Проверка переключения города главной страницы")
     @ParameterizedTest()
-    @MethodSource(value = "cities()")
+    @MethodSource("citiesAndLanguage")
     public void checkChangeCityMaim(
             final Cities newCity,
             final Languages language
