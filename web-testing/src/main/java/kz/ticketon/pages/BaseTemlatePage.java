@@ -58,7 +58,7 @@ public class BaseTemlatePage {
         }
         accordeonCity.click();
         $x(String.format(
-                "//a[@class='DropdownListItem_listItemLink___X5tk' and contains(text(),'%s')]",
+                "//a[@class='ListItemWithRadioButton_listItemLink__v8cti' and contains(text(),'%s')]",
                 getCityName(newCity)
         )).click();
         this.city = newCity;
