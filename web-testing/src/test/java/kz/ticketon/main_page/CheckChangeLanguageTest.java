@@ -8,27 +8,21 @@ import kz.ticketon.Languages;
 import kz.ticketon.pages.MainPage;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
 
 @Feature("Работоспособность основных элемнтов главной страницы")
 public class CheckChangeLanguageTest extends BaseClassWebTest {
-    static Stream<Object[]> languages() {
-        List<Object[]> list = new ArrayList<>();
-        Arrays.asList(Languages.values()).forEach(
-                startLanguage -> Arrays.asList(Languages.values()).forEach(
-                        newLanguage -> {
-                            if (startLanguage != newLanguage) {
-                                list.add(new Object[]{startLanguage, newLanguage});
-                            }
-                        }
-                )
-        );
-        return list.stream();
+    static Stream<Arguments> languages() {
+
+        return Arrays.stream(Languages.values())
+                .flatMap(startLanguage -> Arrays.stream(Languages.values())
+                        .filter(newLanguage -> startLanguage != newLanguage)
+                        .map(newLanguage -> Arguments.of(startLanguage, newLanguage)));
+
     }
 
     @Story("Проверка переключения языка главной страницы")

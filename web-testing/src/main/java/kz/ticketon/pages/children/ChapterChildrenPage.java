@@ -28,7 +28,7 @@ public class ChapterChildrenPage extends ChapterPage {
 
     @Override
     public EventPage clickFirstEvent() {
-        SleepUtils.sleepSeconds(5);
+        SleepUtils.sleepSeconds(10);
         if (eventList.isEmpty()) {
             throw new RuntimeException("Доступных мероприятий нет");
         }

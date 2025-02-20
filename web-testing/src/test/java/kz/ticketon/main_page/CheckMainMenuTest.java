@@ -10,25 +10,20 @@ import kz.ticketon.pages.ChapterPage;
 import kz.ticketon.pages.MainPage;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
 
 @Feature("Работоспособность основных элемнтов главной страницы")
 public class CheckMainMenuTest extends BaseClassWebTest {
-    static Stream<Object[]> menuItemsAndCitiesAndLanguages() {
-        List<Object[]> list = new ArrayList<>();
-        Arrays.asList(MainMenuButtonsMainPage.values()).forEach(
-                item -> Arrays.asList(Cities.values()).forEach(
-                        city -> Arrays.asList(Languages.values()).forEach(
-                                language -> list.add(new Object[]{item, city, language})
-                        )
-                )
-        );
-        return list.stream();
+    static Stream<Arguments> menuItemsAndCitiesAndLanguages() {
+
+        return Arrays.stream(MainMenuButtonsMainPage.values())
+                .flatMap(item -> Arrays.stream(Cities.values())
+                        .flatMap(city -> Arrays.stream(Languages.values())
+                                .map(language -> Arguments.of(item, city, language))));
     }
 
     @Story("Проверка кликов кнопок разделов главного меню и переходов на страницы выбранных разделов, с учетом выбора города и языка")

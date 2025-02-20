@@ -8,30 +8,20 @@ import kz.ticketon.Languages;
 import kz.ticketon.pages.MainPage;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
 
 @Feature("Работоспособность основных элемнтов главной страницы")
 public class CheckChangeCityTest extends BaseClassWebTest {
 
-    static Stream<Object[]> citiesAndLanguage() {
-        List<Object[]> list = new ArrayList<>();
-        Arrays.asList(Cities.values()).forEach(
-                city -> Arrays.asList(Languages.values()).forEach(
-                        language -> {
-                            {
-                                if (city != Cities.NO_CITY) {
-                                    list.add(new Object[]{city, language});
-                                }
-                            }
-                        }
-                )
-        );
-        return list.stream();
+    static Stream<Arguments> citiesAndLanguage() {
+       return Arrays.stream(Cities.values())
+               .filter(city -> city != Cities.NO_CITY)
+               .flatMap(city -> Arrays.stream(Languages.values())
+                       .map(language -> Arguments.of(city, language)));
     }
 
     @Story("Проверка переключения города главной страницы")
