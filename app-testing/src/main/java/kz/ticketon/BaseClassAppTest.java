@@ -1,5 +1,7 @@
 package kz.ticketon;
 
+import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverRunner;
 import io.appium.java_client.android.AndroidDriver;
 import io.qameta.allure.Step;
 import kz.ticketon.pages.ChooseCityPage;
@@ -9,24 +11,27 @@ import kz.ticketon.pages.MainScreenAppPage;
 import kz.ticketon.utils.PropertiesUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 import java.util.Set;
 
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selenide.$x;
+
 public class BaseClassAppTest {
     protected static AndroidDriver driver;
+
+    final SelenideElement textCheckRu = $x("//android.widget.TextView[@text='Выберите язык']");
+    final SelenideElement textCheck = $x("//android.widget.TextView");
 
     @BeforeEach
     public void initialize() throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
-
         capabilities.setCapability("platformName", PropertiesUtil.get("platform.name"));
-        capabilities.setCapability("deviceName", PropertiesUtil.get("device.mame"));
+        capabilities.setCapability("deviceName", PropertiesUtil.get("device.name"));
         capabilities.setCapability("platformVersion", PropertiesUtil.get("platform.version"));
         capabilities.setCapability("automationName", PropertiesUtil.get("automation.name"));
         capabilities.setCapability("appPackage", PropertiesUtil.get("app.package"));
@@ -35,28 +40,32 @@ public class BaseClassAppTest {
         driver = new AndroidDriver(new URL(PropertiesUtil.get("appium.url")), capabilities);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
-        // 🔹 Проверка доступных контекстов (NATIVE_APP, WEBVIEW и т. д.)
+        // Подключаем драйвер к Selenide
+        WebDriverRunner.setWebDriver(driver);
+        // Проверка доступных контекстов (NATIVE_APP, WEBVIEW и т. д.)
+        printAvailableContexts();
+    }
+
+    @Step("Вывод доступных контекстов")
+    private void printAvailableContexts() {
         Set<String> contexts = driver.getContextHandles();
         for (String context : contexts) {
             System.out.println("Доступный контекст: " + context);
         }
     }
 
-    @Step("Проверка открытия экрана выбора языка, заголовок экрана по умолчанию на русском")
-    public ChooseLanguagePage checkLanguagePage(final ChooseLanguagePage chooseLanguagePage) {
+    @Step("Проверка открытия экрана выбора языка")
+    public ChooseLanguagePage checkLanguagePage (final ChooseLanguagePage chooseLanguagePage){
         try {
-            chooseLanguagePage.getWait().until(ExpectedConditions.elementToBeClickable(By.xpath(
-                    "//android.widget.TextView[@text='Выберите язык']"
-            )));
+            textCheckRu.shouldHave(text("Выберите язык"), Duration.ofSeconds(50));
         } catch (Exception e) {
             throw new RuntimeException("Ожидаемый заголовок экрана не найден");
         }
         return chooseLanguagePage;
     }
 
-    @Step("Проверка открытия экрана устаноки города")
-    public ChooseCityPage checkChooseCityPage(final ChooseCityPage chooseCityPage) {
-        final String xpathButtonChooseCity = "//android.widget.TextView[@text='%s']";
+    @Step("Проверка выбора города")
+    public ChooseCityPage checkChooseCityPage (final ChooseCityPage chooseCityPage){
         final String titleString = switch (chooseCityPage.getLanguage()) {
             case KZ -> "Қаланы таңдаңыз";
             case ENG -> "Choose city";
@@ -64,46 +73,39 @@ public class BaseClassAppTest {
         };
 
         try {
-            chooseCityPage.getWait().until(ExpectedConditions.elementToBeClickable(
-                    By.xpath(String.format(xpathButtonChooseCity, titleString))
-            ));
+            textCheck.shouldHave(text(titleString), Duration.ofSeconds(50));
         } catch (Exception e) {
             throw new RuntimeException("Ожидаемый заголовок экрана не найден");
         }
         return chooseCityPage;
     }
 
-    @Step("Проверка открытия экрана главной страницы приложения")
-    public MainScreenAppPage checkMainPage(final MainScreenAppPage mainScreenAppPage) {
-        final String xpathTitle = "//android.widget.TextView[@text='%s']";
+    @Step("Проверка главного экрана")
+    public MainScreenAppPage checkMainPage (final MainScreenAppPage mainScreenAppPage){
         final String titleString = switch (mainScreenAppPage.getLanguage()) {
             case KZ -> "Басты";
             case ENG -> "Home";
             default -> "Главная";
         };
+
         try {
-            mainScreenAppPage.getWait().until(ExpectedConditions.elementToBeClickable(
-                    By.xpath(String.format(xpathTitle, titleString))
-            ));
+            textCheck.shouldHave(text(titleString), Duration.ofSeconds(50));
         } catch (Exception e) {
             throw new RuntimeException("Ожидаемый заголовок экрана не найден");
         }
         return mainScreenAppPage;
     }
 
-    @Step("Проверка открытия экрана 'События'")
-    public EventsPage checkEvents(final EventsPage eventsPage) {
-        final String xpathTitle = "//android.widget.TextView[@text='%s']";
-
+    @Step("Проверка экрана 'События'")
+    public EventsPage checkEvents (final EventsPage eventsPage){
         final String titleString = switch (eventsPage.getLanguage()) {
             case KZ -> "Оқиғалар";
             case ENG -> "Events";
             default -> "События";
         };
+
         try {
-            eventsPage.getWait().until(ExpectedConditions.elementToBeClickable(
-                    By.xpath(String.format(xpathTitle, titleString))
-            ));
+            textCheck.shouldHave(text(titleString), Duration.ofSeconds(50));
         } catch (Exception e) {
             throw new RuntimeException("Ожидаемый заголовок экрана не найден");
         }
@@ -112,6 +114,8 @@ public class BaseClassAppTest {
 
     @AfterEach
     public void tearDown() {
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }
