@@ -6,9 +6,8 @@ import kz.ticketon.Languages;
 import kz.ticketon.pages.ChapterPage;
 import kz.ticketon.pages.EventPage;
 import kz.ticketon.pages.cinema.EventCinemaPage;
+import kz.ticketon.utils.SleepUtils;
 import org.openqa.selenium.By;
-
-import java.util.concurrent.TimeUnit;
 
 public class ChapterChristmasEventPage extends ChapterPage {
     public ChapterChristmasEventPage(Cities city, Languages language) {
@@ -29,11 +28,7 @@ public class ChapterChristmasEventPage extends ChapterPage {
     //заглушка, для данного раздела пока полной реализации нет
     @Override
     public EventPage clickFirstEvent() {
-        try {
-            TimeUnit.SECONDS.sleep(5);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        SleepUtils.sleepSeconds(5);
         if (eventList.isEmpty()) {
             throw new RuntimeException("Доступных мероприятий нет");
         }

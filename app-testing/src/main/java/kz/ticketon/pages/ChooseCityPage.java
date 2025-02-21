@@ -10,9 +10,9 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class ChooseCityPage {
     private final Languages language;
-    private final String AccordeonCity = "//android.widget.TextView[@resource-id='android:id/text1' and @text='%s']";
-    private final String ChooseCity = "//android.widget.CheckedTextView[@resource-id='android:id/text1' and @text='%s']";
-    private final String ButtonNext = "//android.widget.TextView[@text='%s']";
+    private final String accordeonCity = "//android.widget.TextView[@resource-id='android:id/text1' and @text='%s']";
+    private final String chooseCity = "//android.widget.CheckedTextView[@resource-id='android:id/text1' and @text='%s']";
+    private final String buttonNext = "//android.widget.TextView[@text='%s']";
 
     public ChooseCityPage(Languages language) {
         this.language = language;
@@ -30,15 +30,15 @@ public class ChooseCityPage {
             default -> "Алматы";
         };
 
-        $x(String.format(AccordeonCity, startCityString)).shouldBe(visible).click();
-        $x(String.format(ChooseCity, NamedUtils.getCityNameByLanguage(city, language))).shouldBe(visible).click();
+        $x(String.format(accordeonCity, startCityString)).shouldBe(visible).click();
+        $x(String.format(chooseCity, NamedUtils.getCityNameByLanguage(city, language))).shouldBe(visible).click();
 
         final String nameButtonString = switch (language) {
             case KZ -> "БАСТАУ";
             case ENG -> "START";
             default -> "НАЧАТЬ";
         };
-        $x(String.format(ButtonNext, nameButtonString)).shouldBe(visible).click();
+        $x(String.format(buttonNext, nameButtonString)).shouldBe(visible).click();
 
         return new MainScreenAppPage(language, city);
     }
