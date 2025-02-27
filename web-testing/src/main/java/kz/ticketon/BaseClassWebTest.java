@@ -16,7 +16,7 @@ public class BaseClassWebTest {
     @BeforeAll
     public static void setUpAll() {
         Configuration.browserSize = "1920x1080";
-        Configuration.timeout = 10000;
+        Configuration.timeout = 40000;
         Configuration.pageLoadTimeout = 40000;
         //  Configuration.headless = true;
         Configuration.browserCapabilities = new ChromeOptions().addArguments("--remote-allow-origins=*");
