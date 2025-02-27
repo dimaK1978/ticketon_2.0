@@ -15,7 +15,8 @@ public class MainPage extends BaseTemlatePage {
     private final SelenideElement headerEventSchedule = $x("//h1[@class='Title_title__6QR87 Title_h1__YhWT1']");
     private final SelenideElement event =
             $("div[class='DetailedCardHover_eventHover__kxTCp DetailedCardPoster_eventHover__bYnSD']")
-            .$("div[class='DetailedCardHover_eventHoverTitle__OpJPs']");
+                    .$("div[class='DetailedCardHover_eventHoverTitle__OpJPs']");
+    private final SelenideElement closeMainBanner = $("path[d='M6 14L14 6M14 14L6 6'] ");
 
     public MainPage(Cities city, Languages language) {
         super(city, language);
@@ -24,6 +25,9 @@ public class MainPage extends BaseTemlatePage {
     @Step("Открытие главной страницы")
     public void openPage() {
         open(getPageUrlCityLanguage());
+        if (closeMainBanner.isDisplayed()) {
+            closeMainBanner.click();
+        }
     }
 
     @Step("Получение заголовка первого доступного события размещенного на странице")
