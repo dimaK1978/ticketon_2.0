@@ -9,7 +9,7 @@ import kz.ticketon.pages.MainPage;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
 
-@Feature("Работоспособность основных элемнтов главной страницы")
+@Feature("Работоспособность основных элементов главной страницы")
 public class CheckSearchEventsTest extends BaseClassWebTest {
     @Test()
     @Story("Проверка элемента поиска событий")

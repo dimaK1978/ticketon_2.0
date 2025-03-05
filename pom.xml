@@ -62,6 +62,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <allure.version>2.25.0</allure.version>
         <aspectj.version>1.9.22.1</aspectj.version>
+        <testClass>DefaultTest</testClass>
     </properties>
     <build>
         <plugins>
@@ -79,6 +80,9 @@
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
                     <testFailureIgnore>true</testFailureIgnore>
+                    <includes>
+                        <include>${testClass}.java</include>
+                    </includes>
                 </configuration>
                 <dependencies>
                     <dependency>
