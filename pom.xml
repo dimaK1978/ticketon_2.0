@@ -8,11 +8,36 @@
     <artifactId>ticketon-test</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <modules>
-        <module>web-testing</module>
-        <module>app-testing</module>
-        <module>core</module>
-    </modules>
+
+    <profiles>
+        <profile>
+            <id>all</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <modules>
+                <module>web-testing</module>
+                <module>app-testing</module>
+                <module>core</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>web</id>
+            <modules>
+                <module>web-testing</module>
+                <module>core</module>
+            </modules>
+        </profile>
+
+        <profile>
+            <id>app</id>
+            <modules>
+                <module>app-testing</module>
+                <module>core</module>
+            </modules>
+        </profile>
+    </profiles>
 
     <dependencyManagement>
         <dependencies>
